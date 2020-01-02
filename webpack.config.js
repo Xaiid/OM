@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: ['babel-polyfill', path.join(__dirname, 'src', 'js', 'app.js')],
+  entry: [path.join(__dirname, 'src', 'js', 'app.js')],
   context: path.resolve(__dirname, 'src'),
   output: {
     filename: path.join('build', 'build.js'),
@@ -34,14 +34,12 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: ['react']
-            }
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
           }
-        ]
+        }
       },
       {
         test: /\.css$/,
@@ -97,20 +95,5 @@ module.exports = {
       }
     ]
   },
-  devtool: 'source-map',
-  devServer: {
-    proxy: {
-      '/api': {
-        target: 'http://localhost:3000',
-        changeOrigin: true,
-        secure: false
-      }
-    },
-    inline: true,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
-      'Access-Control-Allow-Headers': '*'
-    }
-  }
+  devtool: 'source-map'
 };
