@@ -5,7 +5,6 @@ class List extends React.Component {
   constructor(props) {
     super(props)
 
-
     this.state = {
       items: props.items || [],
       root: props.root
@@ -24,15 +23,14 @@ class List extends React.Component {
 
   add = () => {
     this.setState({
-      items: [...this.state.items, { id: this.state.items.length, subitems: [],  text: `Item ${this.state.items.length + 1}` }],
+      items: [...this.state.items, { id: this.state.items.length, items: [],  text: `Item ${this.state.items.length + 1}` }],
     })
   }
 
-  update = (e, id) => {
+  update = (text, id) => {
     let items = this.state.items.slice()
     let index = this.state.items.indexOf(this.state.items.find(obj => id === obj.id))
-    items[index]['text'] = e.target.value
-
+    items[index]['text'] = text
     this.setState({
       items: items,
     })
@@ -41,7 +39,7 @@ class List extends React.Component {
   addChild = id => {
     let items = this.state.items.slice()
     let index = this.state.items.indexOf(this.state.items.find(obj => id === obj.id))
-    items[index]['subitems'].push({ id: `${items[index].id}${items[index].subitems.length}`, subitems: [], text: `Item ${items[index].subitems.length}` })
+    items[index]['items'].push({ id: `${items[index].id}${items[index].items.length}`, items: [], text: `Item ${items[index].items.length}` })
     this.setState({
       items: items,
     })
@@ -60,7 +58,7 @@ class List extends React.Component {
               key={this.state.items[index].id}
               remove={this.remove}
               update={this.update}
-              addChild={this.addChild}
+              add={this.addChild}
               item={this.state.items[index]}
             />
 
