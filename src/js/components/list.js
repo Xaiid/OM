@@ -5,7 +5,7 @@ class List extends React.Component {
   constructor(props) {
     super(props)
 
-    this.emptyItems = [{ id: 0, text: 'HOLA', items: [] }]
+    this.emptyItems = [{ id: 0, items: [], text: '' }]
 
     this.state = {
       items: this.emptyItems,
@@ -27,6 +27,17 @@ class List extends React.Component {
     })
   }
 
+ update = (e, id) => {
+    let items = this.state.items.slice()
+    let index = this.state.items.indexOf(this.state.items.find(obj => id === obj.id))
+    items[index]['text'] = e.target.value
+   console.log("WUT", e.target.value);
+
+    this.setState({
+      items: items,
+    })
+  }
+
   render () {
     return (<section>
 
@@ -40,6 +51,7 @@ class List extends React.Component {
             return <Item
               key={this.state.items[index].id}
               remove={this.remove}
+              update={this.update}
               item={this.state.items[index]}
             />
 
