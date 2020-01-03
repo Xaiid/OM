@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import css from 'styles/List';
 import Item from './item.js';
+import * as uuid from 'uuid/v1'
+
 
 function List({root, items, editing, ...props}){
 
@@ -14,7 +16,7 @@ function List({root, items, editing, ...props}){
   }
 
   const add = () => {
-    setList([...itemList, { id: itemList.length, items: [],  text: `Item ${itemList.length + 1}` }])
+    setList([...itemList, { id: uuid(), items: [],  text: `New Item` }])
   }
 
   const update = (text, id) => {

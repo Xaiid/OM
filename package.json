@@ -51,6 +51,7 @@
     "prop-types": "15.7.2",
     "react": "16.8.6",
     "react-dom": "16.8.6",
-    "restify": "^8.5.1"
+    "restify": "^8.5.1",
+    "uuid": "^3.3.3"
   }
 }
