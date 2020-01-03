@@ -1,10 +1,9 @@
 {
-  "name": "weather-sandbox",
+  "name": "OM",
   "version": "1.0.0",
   "engines": {
     "node": "10.15.3"
   },
-  "description": "Sample environment for a weather test app",
   "jest": {
     "moduleNameMapper": {
       "\\.(gif|css|scss)$": "<rootDir>/__mocks__/styleMock.js"
