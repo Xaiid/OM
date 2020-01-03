@@ -9,28 +9,14 @@ module.exports = {
     publicPath: ''
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.css', '.sass', '.gif'],
+    extensions: ['.js', '.jsx', '.css'],
     modules: [
-      path.resolve(__dirname, 'images'),
       path.resolve(__dirname, 'src'),
       path.resolve(__dirname, 'node_modules')
     ],
-    alias: {
-      // so we can @import '~styles/base.sass'
-      styles: path.resolve(__dirname, 'src', 'styles')
-    }
   },
   module: {
     rules: [
-      {
-        test: /\.(gif|png|jpe?g|svg)$/i,
-        use: [
-          'file-loader',
-          {
-            loader: 'image-webpack-loader'
-          }
-        ]
-      },
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
@@ -59,36 +45,6 @@ module.exports = {
               plugins: [
                 require('autoprefixer')({ browsers: ['last 2 versions'] })
               ]
-            }
-          }
-        ]
-      },
-      {
-        test: /\.sass$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              importLoaders: 2,
-              localIdentName: '[path]--[name]--[local]--[hash:base64:5]'
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: [
-                require('autoprefixer')({ browsers: ['last 2 versions'] })
-              ]
-            }
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              indentedSyntax: true,
-              sourceMap: true,
-              sourceMapContents: true
             }
           }
         ]
