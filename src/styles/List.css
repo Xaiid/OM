@@ -29,7 +29,12 @@ li{
   border-bottom: 1px solid #ccc;
   padding-bottom: 10px;
   margin: 10px 0;
+  cursor: pointer;
+  position:relative;
+}
 
+.childs{
+  border-bottom: 2px solid #020a19;
 }
 
 button span{
@@ -55,6 +60,9 @@ button:hover{
 .subitem,.cancel{
   font-size: 12px;
   width: 100px;
+  position: absolute;
+  top: 6px;
+  left: 212px;
 }
 
 label{
@@ -73,5 +81,14 @@ label{
   margin-top: 12px;
   margin: 0;
   padding: 0;
+  border-bottom: 2px solid #716b6b;
 }
 
+.root{
+  box-shadow: 0 0 3px;
+  padding: 15px;
+  box-sizing: border-box;
+  border: none;
+}
+
+.hidden{display: none;}

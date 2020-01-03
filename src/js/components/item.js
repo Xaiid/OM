@@ -2,14 +2,15 @@ import React, {useState} from 'react';
 import List from './list.js';
 import css from 'styles/Item';
 
-function Item({item, remove, update, ...props}){
+function Item({item, remove, add, update, ...props}){
 
   const [editMode, setEditMode] = useState(false);
   const [prevValue, setPrevValue] = useState(item.text);
+  const [showChilds, setShowChilds] = useState(true);
 
   const toggleEditMode = () => {
-    setPrevValue(item.text)
     setEditMode(!editMode)
+    setPrevValue(item.text)
   }
 
   const cancel = () => {
@@ -17,8 +18,14 @@ function Item({item, remove, update, ...props}){
     setEditMode(false)
   }
 
+  const toggleChilds = () => {
+    if(!editMode){
+      setShowChilds(!showChilds);
+    }
+  }
+
   return (
-    <li key={item.id} >
+    <li key={item.id} className={['animated', 'fadeIn'].join(' ')}>
        {editMode && (<input
         value={item.text}
         onChange={(e) => {update(e.target.value, item.id)}}
@@ -28,7 +35,7 @@ function Item({item, remove, update, ...props}){
       {editMode && <button
           type="button"
           className={css.cancel}
-          onClick={cancel}><i class="fas fa-window-close"></i></button>}
+          onClick={cancel}><i className="fas fa-window-close"></i></button>}
       <button
           type="button"
           className="edit"
@@ -39,8 +46,18 @@ function Item({item, remove, update, ...props}){
         onClick={() => {remove(item.id)}}>
         <i className="fas fa-trash"></i>
       </button>
+      <button
+        type="button"
+        className="remove"
+        onClick={toggleChilds}>
+        {showChilds && <i className="fas fa-folder-open"></i>}
+        {!showChilds && <i className="fas fa-folder"></i>}
+      </button>
+      <div  className={showChilds ? css.sublist : css.hidden}>
       <List
+        editing={editMode}
         items={item.items}/>
+      </div>
     </li>
   )
 }

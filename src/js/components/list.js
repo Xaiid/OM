@@ -2,62 +2,53 @@ import React, { useState, useEffect } from 'react';
 import css from 'styles/List';
 import Item from './item.js';
 
-class List extends React.Component {
-  constructor(props) {
-    super(props)
+function List({root, items, editing, ...props}){
 
-    this.state = {
-      items: props.items || [],
-      root: props.root
-    }
-  }
+  const [itemList, setList] = useState(items || []);
 
-  remove = id => {
-    let position = this.state.items.indexOf(this.state.items.find(obj => id === obj.id))
-    let items = this.state.items.slice()
+  const remove = id => {
+    let position = itemList.indexOf(itemList.find(obj => id === obj.id))
+    let items = itemList.slice()
     items.splice(position, 1)
-    this.setState({
-      items: items,
-    })
+    setList(items)
   }
 
-  add = () => {
-    this.setState({
-      items: [...this.state.items, { id: this.state.items.length, items: [],  text: `Item ${this.state.items.length + 1}` }],
-    })
+  const add = () => {
+    setList([...itemList, { id: itemList.length, items: [],  text: `Item ${itemList.length + 1}` }])
   }
 
-  update = (text, id) => {
-    let items = this.state.items.slice()
-    let index = this.state.items.indexOf(this.state.items.find(obj => id === obj.id))
+  const update = (text, id) => {
+    let items = itemList.slice()
+    let index = itemList.indexOf(itemList.find(obj => id === obj.id))
     items[index]['text'] = text
-    this.setState({
-      items: items,
-    })
+    setList(items);
   }
 
-  render () {
-    return (<section className={this.state.items.length ? css.subitems : css.list}>
-      <ol>
-        {
-          this.state.items.map((i, index) => {
-            return <Item
-              key={this.state.items[index].id}
-              remove={this.remove}
-              update={this.update}
-              item={this.state.items[index]}
-            />
+  return (<section className={[itemList.length ? css.subitems : css.list, root ? css.root : '' ].join(' ')}>
+    <ol>
+      {
+        itemList.map((i, index) => {
+          return <Item
+            key={itemList[index].id}
+            remove={remove}
+            update={update}
+            item={itemList[index]}
+          />
+        })
+      }
+    </ol>
 
-          })
-        }
-      </ol>
-      <button
-        type="button"
-        className={this.state.root ? css.item : css.subitem}
-        onClick={this.add}>{this.state.root? <span><i className="fas fa-plus"></i> New Item</span>: <span><i className="fas fa-plus"></i> Sub Item</span> }</button>
-    </section>
-    )
-  }
+    <button
+      type="button"
+      className={[root ? css.item : css.subitem, editing ? css.hidden : ''].join(' ')}
+      onClick={add}>
+      {root ?
+        <span><i className="fas fa-plus"></i> New Item</span> :
+        <span><i className="fas fa-plus"></i> Sub Item</span>
+      }
+    </button>
+  </section>
+  )
 }
 
 export default List;
