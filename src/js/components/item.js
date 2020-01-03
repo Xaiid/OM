@@ -36,11 +36,21 @@ function Item({ item, remove, add, update, ...props }) {
       )}
       {!editMode && <label> {item.text}</label>}
       {editMode && (
-        <button type="button" className={css.cancel} onClick={cancel}>
+        <button
+          type="button"
+          title="cancel"
+          className={css.cancel}
+          onClick={cancel}
+        >
           <i className="fas fa-window-close" />
         </button>
       )}
-      <button type="button" className="edit" onClick={toggleEditMode}>
+      <button
+        type="button"
+        title={editMode ? 'Save' : 'Edit'}
+        className="edit"
+        onClick={toggleEditMode}
+      >
         {editMode ? (
           <i className="fas fa-save" />
         ) : (
@@ -49,6 +59,7 @@ function Item({ item, remove, add, update, ...props }) {
       </button>
       <button
         type="button"
+        title="Remove"
         className="remove"
         onClick={() => {
           remove(item.id);
@@ -56,12 +67,17 @@ function Item({ item, remove, add, update, ...props }) {
       >
         <i className="fas fa-trash" />
       </button>
-      <button type="button" className="remove" onClick={toggleChilds}>
+      <button
+        type="button"
+        title="Expand"
+        className="remove"
+        onClick={toggleChilds}
+      >
         {showChilds && <i className="fas fa-folder-open" />}
         {!showChilds && <i className="fas fa-folder" />}
       </button>
       <div className={showChilds ? css.sublist : css.hidden}>
-        <List editing={editMode} items={item.items} />
+        <List items={item.items} />
       </div>
     </li>
   );

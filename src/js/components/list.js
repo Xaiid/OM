@@ -3,7 +3,7 @@ import css from 'styles/List';
 import Item from './item.js';
 import * as uuid from 'uuid/v1';
 
-function List({ root, items, editing, ...props }) {
+function List({ root, items, ...props }) {
   const [itemList, setList] = useState(items || []);
 
   const remove = id => {
@@ -46,10 +46,7 @@ function List({ root, items, editing, ...props }) {
 
       <button
         type="button"
-        className={[
-          root ? css.item : css.subitem,
-          editing ? css.hidden : ''
-        ].join(' ')}
+        className={root ? css.item : css.subitem}
         onClick={add}
       >
         {root ? (
