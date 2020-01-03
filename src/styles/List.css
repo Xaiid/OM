@@ -1,0 +1,77 @@
+.list {
+  margin: 0;
+  padding: 0;
+}
+
+button{
+  padding: 5px;
+  cursor: pointer;
+  -webkit-appearance: button;
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  font-size: 1rem;
+  border-radius: 2px;
+  margin: 0 5px;
+  font-family: sans-serif;
+  height: 30px;
+  width: 30px;
+}
+
+li{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  margin: 10px 0;
+
+}
+
+button span{
+  font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+button:hover{
+  background-color: #0069d9;
+  border-color: #0062cc;
+}
+
+.item{
+  width: 100px;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+.item:hover{
+  background-color: #138496;
+  border-color: #117a8b;
+}
+
+.subitem,.cancel{
+  font-size: 12px;
+  width: 100px;
+}
+
+label{
+  color: #212529;
+  background-color: #f8f9fa;
+  font-size: 1.5rem;
+  padding: 7px;
+  font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
+  margin-right: 10px;
+  border-radius: 3px;
+}
+
+.subitems{
+  width: 100%;
+  margin-top: 12px;
+  margin: 0;
+  padding: 0;
+}
+

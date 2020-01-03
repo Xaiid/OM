@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
-import '../../styles/Page.css';
 import List from './list.js';
+import css from 'styles/Item';
 
-
-function Item({item, remove, add, update, ...props}){
+function Item({item, remove, update, ...props}){
 
   const [editMode, setEditMode] = useState(false);
   const [prevValue, setPrevValue] = useState(item.text);
@@ -19,29 +18,27 @@ function Item({item, remove, add, update, ...props}){
   }
 
   return (
-    <li key={item.id} className="Page">
+    <li key={item.id} >
        {editMode && (<input
         value={item.text}
         onChange={(e) => {update(e.target.value, item.id)}}
         type="text"
       />)}
       {!editMode && <label> {item.text}</label>}
-      <button
-        type="button"
-        className="add"
-        onClick={() => { add(item.id) }}>Add Sub Item</button>
-      <button
-          type="button"
-          className="edit"
-          onClick={toggleEditMode}>{editMode ? 'Save': 'Edit'}</button>
       {editMode && <button
           type="button"
+          className={css.cancel}
+          onClick={cancel}><i class="fas fa-window-close"></i></button>}
+      <button
+          type="button"
           className="edit"
-          onClick={cancel}>Cancel</button>}
+          onClick={toggleEditMode}>{editMode ? <i className="fas fa-save"></i> : <i className="fas fa-edit"></i>}</button>
       <button
         type="button"
         className="remove"
-        onClick={() => {remove(item.id)}}>X</button>
+        onClick={() => {remove(item.id)}}>
+        <i className="fas fa-trash"></i>
+      </button>
       <List
         items={item.items}/>
     </li>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import css from 'styles/List';
 import Item from './item.js';
 
 class List extends React.Component {
@@ -9,7 +10,6 @@ class List extends React.Component {
       items: props.items || [],
       root: props.root
     }
-    this.update = this.update.bind(this)
   }
 
   remove = id => {
@@ -36,21 +36,8 @@ class List extends React.Component {
     })
   }
 
-  addChild = id => {
-    let items = this.state.items.slice()
-    let index = this.state.items.indexOf(this.state.items.find(obj => id === obj.id))
-    items[index]['items'].push({ id: `${items[index].id}${items[index].items.length}`, items: [], text: `Item ${items[index].items.length}` })
-    this.setState({
-      items: items,
-    })
-  }
-
   render () {
-    return (<section>
-      <button
-        type="button"
-        className="add"
-        onClick={this.add}>{this.state.root? 'Add Item' : 'Add Sub Item'}</button>
+    return (<section className={this.state.items.length ? css.subitems : css.list}>
       <ol>
         {
           this.state.items.map((i, index) => {
@@ -58,13 +45,16 @@ class List extends React.Component {
               key={this.state.items[index].id}
               remove={this.remove}
               update={this.update}
-              add={this.addChild}
               item={this.state.items[index]}
             />
 
           })
         }
       </ol>
+      <button
+        type="button"
+        className={this.state.root ? css.item : css.subitem}
+        onClick={this.add}>{this.state.root? <span><i className="fas fa-plus"></i> New Item</span>: <span><i className="fas fa-plus"></i> Sub Item</span> }</button>
     </section>
     )
   }
